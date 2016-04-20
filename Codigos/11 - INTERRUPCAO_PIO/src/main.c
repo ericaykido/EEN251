@@ -62,7 +62,7 @@ static void push_button_handle(uint32_t id, uint32_t mask);
 #define MASK_LED_BLUE	(1u << PIN_LED_BLUE)
 #define MASK_LED_GREEN	(1u << PIN_LED_GREEN)
 #define MASK_LED_RED	(1u << PIN_LED_RED)
-#define MASK_BUT_2		(1u << PORT_BUT_2)
+#define MASK_BUT_2		(1u << PIN_BUT_2)
 
 /************************************************************************/
 /*  INTERRUPÇÃO PORTB													*/
