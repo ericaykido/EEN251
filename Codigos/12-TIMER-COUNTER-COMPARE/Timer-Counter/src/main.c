@@ -166,6 +166,11 @@ static void configure_tc(void)
 	*	#define TC_IER_ETRGS (0x1u << 7)	External Trigger 
 	*/
 	//tc_enable_interrupt();
+    
+    /*
+     * Inicializa o timer
+     */
+    //tc_start();
 }
 
 
