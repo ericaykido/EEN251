@@ -153,6 +153,13 @@ int main (void)
 	*	Loop infinito
 	*/
 	while(1){
+
+        /**
+         * Entra em modo Sleep 
+         * só é acordado por uma interrupção
+         */
+        //pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
+
 		pio_set(PIOA, (1 << PIN_LED_BLUE));
 		delay_ms(500);
 		pio_clear(PIOA, (1 << PIN_LED_BLUE));

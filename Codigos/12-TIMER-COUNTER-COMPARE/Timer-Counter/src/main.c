@@ -9,10 +9,10 @@
 *	Muda o estado do led em uma frequencia pré definida (inicial 4Hz)
 *
 * 2 - Botao 1
-*	Altera a frequencia do led em 2Hz para cima
+*	Altera a frequencia do led em 10% para cima
 *	
 * 3 - Botao 2
-*	Altera a frequencia do led em 2Hz para baixo
+*	Altera a frequencia do led em 10% para baixo
 *
 ************************************************************************/
 
@@ -58,7 +58,9 @@ void TC0_Handler(void)
 {
 	volatile uint32_t ul_dummy;
 
-	/* Clear status bit to acknowledge interrupt */
+    /****************************************************************
+	* Devemos indicar ao TC que a interrupção foi satisfeita.
+    ******************************************************************/
 	//ul_dummy = tc_get_status();
 
 	/* Avoid compiler warning */
@@ -79,6 +81,17 @@ static void configure_buttons(void)
 
 }
 
+/**
+ *  \brief Configure the LEDs
+ *
+ */
+static void configure_leds(void)
+{
+
+}
+
+
+
 
 /**
  *  Configure Timer Counter 0 to generate an interrupt every 250ms.
@@ -93,39 +106,60 @@ static void configure_tc(void)
 	*/
 	uint32_t ul_sysclk = sysclk_get_cpu_hz();
 	
-	/*
-	*	Ativa o clock do periférico TC 0
+	/****************************************************************
+	* Ativa o clock do periférico TC 0
+	*****************************************************************
 	* 
-	*/
+    * Parametros : 
+    *  1 - ID do periferico
+    * 
+	*
+	*****************************************************************/
 	//pmc_enable_periph_clk();
 
-	/*
+	/*****************************************************************
+	* Configura TC para operar no modo de comparação e trigger RC
+	*****************************************************************
+    *
 	* Configura TC para operar no modo de comparação e trigger RC
 	* devemos nos preocupar com o clock em que o TC irá operar !
 	*
 	* Cada TC possui 3 canais, escolher um para utilizar.
 	*
-	* Configurações de modo de operação :
-	*	#define TC_CMR_ABETRG (0x1u << 10) : TIOA or TIOB External Trigger Selection 
-	*	#define TC_CMR_CPCTRG (0x1u << 14) : RC Compare Trigger Enable 
-	*	#define TC_CMR_WAVE   (0x1u << 15) : Waveform Mode 
-	*
-	* Configurações de clock :
-	*	#define  TC_CMR_TCCLKS_TIMER_CLOCK1 : Clock selected: internal MCK/2 clock signal 
-	*	#define  TC_CMR_TCCLKS_TIMER_CLOCK2 : Clock selected: internal MCK/8 clock signal 
-	*	#define  TC_CMR_TCCLKS_TIMER_CLOCK3 : Clock selected: internal MCK/32 clock signal 
-	*	#define  TC_CMR_TCCLKS_TIMER_CLOCK4 : Clock selected: internal MCK/128 clock signal
-	*	#define  TC_CMR_TCCLKS_TIMER_CLOCK5 : Clock selected: internal SLCK clock signal 
-	*
+    * No nosso caso :
+    * 
 	*	MCK		= 120_000_000
 	*	SLCK	= 32_768		(rtc)
 	*
-	* Uma opção para achar o valor do divisor é utilizar a funcao
+	* Uma opção para achar o valor do divisor é utilizar a funcao, como ela
+    * funciona ?
 	* tc_find_mck_divisor()
-	*/
+	*
+    *
+    * Parametros
+    *   1 - TC a ser configurado (TC0,TC1, ...)
+    *   2 - Canal a ser configurado (0,1,2)
+    *   3 - Configurações do TC :
+    *
+    *   Configurações de modo de operação :
+	*	    TC_CMR_ABETRG  : TIOA or TIOB External Trigger Selection 
+	*	    TC_CMR_CPCTRG  : RC Compare Trigger Enable 
+	*	    TC_CMR_WAVE    : Waveform Mode 
+	*
+	*     Configurações de clock :
+	*	    TC_CMR_TCCLKS_TIMER_CLOCK1 : Clock selected: internal MCK/2 clock signal 
+	*	    TC_CMR_TCCLKS_TIMER_CLOCK2 : Clock selected: internal MCK/8 clock signal 
+	*	    TC_CMR_TCCLKS_TIMER_CLOCK3 : Clock selected: internal MCK/32 clock signal 
+	*	    TC_CMR_TCCLKS_TIMER_CLOCK4 : Clock selected: internal MCK/128 clock signal
+	*	    TC_CMR_TCCLKS_TIMER_CLOCK5 : Clock selected: internal SLCK clock signal 
+	*
+	*****************************************************************/
 	//tc_init();
-	
-	/*
+    
+    /*****************************************************************
+	* Configura valor trigger RC
+    *****************************************************************
+	*
 	* Aqui devemos configurar o valor do RC que vai trigar o reinicio da contagem
 	* devemos levar em conta a frequência que queremos que o TC gere as interrupções
 	* e tambem a frequencia com que o TC está operando.
@@ -142,34 +176,54 @@ static void configure_tc(void)
 	*	| /
 	*	|-----------------> t
 	*
-	*
-	*/
-	//tc_write_rc();
+    * Parametros :
+    *   1 - TC a ser configurado (TC0,TC1, ...)
+    *   2 - Canal a ser configurado (0,1,2)
+    *   3 - Valor para trigger do contador (RC)
+    *****************************************************************/
+    //tc_write_rc();
 	
-	/*
-	* Devemos configurar o NVIC para receber interrupções do TC 
-	*/
-	//NVIC_EnableIRQ();
-	
-	/*
-	* Opções possíveis geradoras de interrupção :
+	/*****************************************************************
+	* Configura interrupção no TC
+    *****************************************************************
+    * Parametros :
+    *   1 - TC a ser configurado
+    *   2 - Canal
+    *   3 - Configurações das interrupções 
 	* 
-	* Essas configurações estão definidas no head : tc.h 
+	*        Essas configurações estão definidas no head : tc.h 
 	*
-	*	#define TC_IER_COVFS (0x1u << 0)	Counter Overflow 
-	*	#define TC_IER_LOVRS (0x1u << 1)	Load Overrun 
-	*	#define TC_IER_CPAS  (0x1u << 2)	RA Compare 
-	*	#define TC_IER_CPBS  (0x1u << 3)	RB Compare 
-	*	#define TC_IER_CPCS  (0x1u << 4)	RC Compare 
-	*	#define TC_IER_LDRAS (0x1u << 5)	RA Loading 
-	*	#define TC_IER_LDRBS (0x1u << 6)	RB Loading 
-	*	#define TC_IER_ETRGS (0x1u << 7)	External Trigger 
-	*/
+	*	        TC_IER_COVFS : 	Counter Overflow 
+	*	        TC_IER_LOVRS : 	Load Overrun 
+	*	        TC_IER_CPAS  : 	RA Compare 
+	*	        TC_IER_CPBS  : 	RB Compare 
+	*	        TC_IER_CPCS  : 	RC Compare 
+	*	        TC_IER_LDRAS : 	RA Loading 
+	*	        TC_IER_LDRBS : 	RB Loading 
+	*	        TC_IER_ETRGS : 	External Trigger 
+	*****************************************************************/
 	//tc_enable_interrupt();
     
-    /*
-     * Inicializa o timer
-     */
+    /*****************************************************************
+	* Ativar interrupção no NVIC
+    *****************************************************************
+    *
+    * Devemos configurar o NVIC para receber interrupções do TC 
+    *
+    * Parametros :
+    *   1 - ID do periférico
+	*****************************************************************/
+	//NVIC_EnableIRQ();
+
+    
+    /*****************************************************************
+	* Inicializa o timer
+    *****************************************************************
+    *
+    * Parametros :
+    *   1 - TC
+    *   2 - Canal
+	*****************************************************************/
     //tc_start();
 }
 
@@ -191,6 +245,10 @@ int main(void)
 	/* Configura os botões */
 	configure_buttons();
 
+    /* Configura Leds */
+    configure_leds();
+
+    
 	while (1) {
 		
 		/* Entra em modo sleep */
