@@ -241,12 +241,12 @@ int main(void)
 
 	/** Configura o timer */
 	configure_tc();
-	
-	/* Configura os botões */
-	configure_buttons();
 
     /* Configura Leds */
     configure_leds();
+	
+	/* Configura os botões */
+	configure_buttons();
 
     
 	while (1) {
