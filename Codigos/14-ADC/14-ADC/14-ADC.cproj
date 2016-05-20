@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
-    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <ProjectGuid>{494aa1d4-e01e-4b7f-a39d-ccd994543300}</ProjectGuid>
     <avrdevice>ATSAM4SD32C</avrdevice>
     <avrdeviceseries>sam4s</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>ILI93XX_EXAMPLE1</AssemblyName>
-    <Name>ILI93XX_EXAMPLE1</Name>
-    <RootNamespace>ILI93XX_EXAMPLE1</RootNamespace>
+    <AssemblyName>14-ADC</AssemblyName>
+    <Name>14-ADC</Name>
+    <RootNamespace>14-ADC</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -36,11 +36,11 @@
     <option id="common.utils.stdio.stdio_serial" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.components.display.aat31xx" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.components.display.ili93xx" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="sam.drivers.adc" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.drivers.smc" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.drivers.pio" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.drivers.pmc" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.drivers.tc" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="sam.drivers.adc" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.components.display.ili93xx.example" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.utils.cmsis.sam4s.source.template" value="Add" config="" content-id="Atmel.ASF" />
   </options>
@@ -223,11 +223,11 @@
     <file path="src/ASF/thirdparty/CMSIS/Lib/license.txt" framework="" version="" source="thirdparty/CMSIS/Lib/license.txt" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/thirdparty/CMSIS/README.txt" framework="" version="" source="thirdparty/CMSIS/README.txt" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/thirdparty/CMSIS/license.txt" framework="" version="" source="thirdparty/CMSIS/license.txt" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/sam/drivers/tc/tc.c" framework="" version="3.28.1" source="sam\drivers\tc\tc.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/sam/drivers/tc/tc.h" framework="" version="3.28.1" source="sam\drivers\tc\tc.h" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/sam/drivers/adc/adc_sam3u.c" framework="" version="3.28.1" source="sam\drivers\adc\adc_sam3u.c" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/sam/drivers/adc/adc.c" framework="" version="3.28.1" source="sam\drivers\adc\adc.c" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/sam/drivers/adc/adc.h" framework="" version="3.28.1" source="sam\drivers\adc\adc.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam/drivers/tc/tc.c" framework="" version="3.28.1" source="sam\drivers\tc\tc.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam/drivers/tc/tc.h" framework="" version="3.28.1" source="sam\drivers\tc\tc.h" changed="False" content-id="Atmel.ASF" />
   </files>
   <documentation help="http://asf.atmel.com/docs/3.28.1/sam.components.display.ili93xx.example.sam4s_ek2/html/index.html" />
   <offline-documentation help="" />
@@ -239,31 +239,20 @@
 </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.samice</avrtool>
-    <avrtoolserialnumber>28012572</avrtoolserialnumber>
+    <avrtoolserialnumber>28012469</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x29A70EE0</avrdeviceexpectedsignature>
     <com_atmel_avrdbg_tool_samice>
       <ToolOptions>
         <InterfaceProperties>
           <JtagDbgClock>4000000</JtagDbgClock>
-          <JtagEnableExtResetOnStartSession>true</JtagEnableExtResetOnStartSession>
-          <JtagInChain>false</JtagInChain>
-          <JtagDevicesBefore>0</JtagDevicesBefore>
-          <JtagDevicesAfter>0</JtagDevicesAfter>
-          <JtagInstrBitsBefore>0</JtagInstrBitsBefore>
-          <JtagInstrBitsAfter>0</JtagInstrBitsAfter>
-          <JtagSelectedDeviceIndexInChain>
-          </JtagSelectedDeviceIndexInChain>
-          <JtagDaisyChainDevices>
-          </JtagDaisyChainDevices>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.samice</ToolType>
-      <ToolNumber>28012572</ToolNumber>
+      <ToolNumber>28012469</ToolNumber>
       <ToolName>SAM-ICE</ToolName>
     </com_atmel_avrdbg_tool_samice>
-    <avrtoolinterface>
-    </avrtoolinterface>
+    <avrtoolinterface>JTAG</avrtoolinterface>
     <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -312,8 +301,8 @@
       <Value>../src/ASF/sam/boards/sam4s_ek2</Value>
       <Value>../src/ASF/sam/drivers/uart</Value>
       <Value>../src/ASF/sam/components/display/ili93xx</Value>
-      <Value>../src/ASF/sam/drivers/adc</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/adc</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -336,7 +325,7 @@
   <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=Reset_Handler -Wl,--cref -mthumb -T../src/ASF/sam/utils/linker_scripts/sam4s/sam4sd32/gcc/flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
-      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/adc</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM4=true -DBOARD=SAM4S_EK2 -D__SAM4SD32C__ -Dprintf=iprintf -Dscanf=iscanf</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -368,8 +357,8 @@
       <Value>../src/ASF/sam/boards/sam4s_ek2</Value>
       <Value>../src/ASF/sam/drivers/uart</Value>
       <Value>../src/ASF/sam/components/display/ili93xx</Value>
-      <Value>../src/ASF/sam/drivers/adc</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/adc</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -421,8 +410,8 @@
       <Value>../src/ASF/sam/boards/sam4s_ek2</Value>
       <Value>../src/ASF/sam/drivers/uart</Value>
       <Value>../src/ASF/sam/components/display/ili93xx</Value>
-      <Value>../src/ASF/sam/drivers/adc</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/adc</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -446,7 +435,7 @@
   <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=Reset_Handler -Wl,--cref -mthumb -T../src/ASF/sam/utils/linker_scripts/sam4s/sam4sd32/gcc/flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
-      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/adc</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -479,8 +468,8 @@
       <Value>../src/ASF/sam/boards/sam4s_ek2</Value>
       <Value>../src/ASF/sam/drivers/uart</Value>
       <Value>../src/ASF/sam/components/display/ili93xx</Value>
-      <Value>../src/ASF/sam/drivers/adc</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/adc</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -548,6 +537,21 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ASF\sam\drivers\adc\adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\adc\adc.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\sam\drivers\adc\adc_sam3u.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\drivers\tc\tc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\tc\tc.h">
+      <SubType>compile</SubType>
+    </None>
     <None Include="src\asf.h">
       <SubType>compile</SubType>
     </None>
@@ -998,15 +1002,6 @@
     <Compile Include="src\ASF\sam\components\display\ili93xx\ili93xx.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ASF\sam\drivers\adc\adc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <None Include="src\ASF\sam\drivers\adc\adc.h">
-      <SubType>compile</SubType>
-    </None>
-    <Compile Include="src\ASF\sam\drivers\adc\adc_sam3u.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\ASF\sam\drivers\ebi\smc\smc.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1028,12 +1023,6 @@
     <Compile Include="src\ASF\sam\drivers\pmc\sleep.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ASF\sam\drivers\tc\tc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <None Include="src\ASF\sam\drivers\tc\tc.h">
-      <SubType>compile</SubType>
-    </None>
     <Compile Include="src\ASF\sam\drivers\uart\uart.c">
       <SubType>compile</SubType>
     </Compile>
