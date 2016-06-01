@@ -26,7 +26,7 @@ struct ili93xx_opt_t g_ili93xx_display_opt;
 /** The analog voltage reference **/
 #define VADREF    (float) 3.3
 /** The maximal data value (no sign) */
-#define MAX_DIGITAL   ((1 « DACC_RESOLUTION) - 1)
+#define MAX_DIGITAL   ((1 << DACC_RESOLUTION) - 1)
 /** The maximal (peak-peak) amplitude value */
 #define MAX_AMPLITUDE (float) 5/6
 /** The minimal (peak-peak) amplitude value */
